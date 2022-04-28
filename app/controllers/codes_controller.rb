@@ -4,13 +4,7 @@ class CodesController < ApplicationController
 #Solo regreasa los valores no vendidos
   def no_mitidos
     @nCodes = Code.all
-    @nCodes.each { |d| 
-      unless d.voucher_vendido == false 
-        render json: []
-      else
-        render json: d
-      end
-    }
+      render json: @nCodes
 
   end
   
