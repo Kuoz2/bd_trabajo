@@ -4,10 +4,8 @@ class CodesController < ApplicationController
 #Solo regreasa los valores no vendidos
   def no_mitidos
     @nCodes = Code.all
-      render json: @nCodes
-
+    @nCodes.each { |d| if d.voucher_vendido == false then render json: d  end}
   end
-  
   # GET /codes
   def index
     @codes = Code.all
