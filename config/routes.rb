@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :codes do 
     collection do 
       get 'no_mitidos'
+      get 'last_code'
     end
   end
   resources :quick_sales do 

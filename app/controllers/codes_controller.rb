@@ -9,6 +9,11 @@ class CodesController < ApplicationController
       @Mitidofalse = nMitidos
       render json: @Mitidofalse
   end
+
+  def last_code
+    @CodeLast = Code.last
+    render json: @CodeLast
+  end
   # GET /codes
   def index
     @codes = Code.all
