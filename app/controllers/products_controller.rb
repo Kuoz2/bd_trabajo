@@ -82,29 +82,34 @@ class ProductsController < ApplicationController
     #@product = [@stock, @date_expiration].each {|d| puts d.products.new(product_params)}
     #@stock = Stock.new(params.permit![:stock_attributes])
     #@date_expiration = DateExpiration.new(params.permit![:date_expiratoins_attributes])
-              if Rails.cache.read('Pverificado') == 'existe'
+            
+    #if Rails.cache.read('Pverificado') == 'existe'
                 Rails.cache.delete('Pverificado') 
 
               @product = Product.new(product_params)
               @product.create_stock!(params.permit![:stock])
               @product.create_date_expiration!(params.permit![:date_expiration])
+            
     #@product.Stock.create(params!.permit![:stock])
     #@product.DateExpiration.create(params!.permit![:date_expiration])
             if @product.save
-
               #.new_envio_email.deliver_later
               #ApplicationMailer.new_envio_email.deliver_now
-
+              dato = @product.as_json
+              producto = dato["pdescripcion"]
+              bitacora = Binnacle.new(asunto: "Guardo", q_se_iso:producto.to_s)
+              bitacora.save
+              puts bitacora.as_json
               render json: {guardado: 'correctamente'}, status: :created, location: @product
             else
 
               render json: @product.errors, status: :unprocessable_entity
             end
           
-            else
-            render json: {resive: 'no tiene permiso'}
+          #  else
+           # render json: {resive: 'no tiene permiso'}
     end
-  end
+  #end
 
   def envio_email_vencidos
     ApplicationMailer.new_envio_email.deliver_now

@@ -20,4 +20,6 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :stocks
   accepts_nested_attributes_for :date_expirations
   accepts_nested_attributes_for :codes
+
+
 end
