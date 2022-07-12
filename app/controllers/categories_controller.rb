@@ -33,8 +33,8 @@ class CategoriesController < ApplicationController
   # POST /categories
   def create 
     
- # if  Rails.cache.read('PCAverificado') == 'existe' 
-  # Rails.cache.delete('PCAverificado') 
+  if  Rails.cache.read('PCAverificado') == 'existe' 
+   Rails.cache.delete('PCAverificado') 
 
     @category = Category.new(category_params)
     if @category.save
@@ -48,15 +48,15 @@ class CategoriesController < ApplicationController
     else
       render json: @category.errors, status: :not_found
     end
-#   else
- #   render json: {resive: 'no tiene permiso'}
- #  end
+   else
+   render json: {resive: 'no tiene permiso'}
+  end
   end
     
   # PATCH/PUT /categories/1
   def update
-  #  if Rails.cache.read('PCAnuverificado' ) == 'existe'
-   #   Rails.cache.delete('PCAnuverificado' )
+    if Rails.cache.read('PCAnuverificado' ) == 'existe'
+      Rails.cache.delete('PCAnuverificado' )
       if @category.update(category_params)
         
         dato = @category.as_json
@@ -69,10 +69,10 @@ class CategoriesController < ApplicationController
     else
       render json: @category.errors, status: :unprocessable_entity
     end
-  #else
-   # render json: {resive: 'no tiene permiso'}
+  else
+    render json: {resive: 'no tiene permiso'}
 
-  #end
+  end
 
   end
 

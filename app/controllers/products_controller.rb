@@ -83,7 +83,7 @@ class ProductsController < ApplicationController
     #@stock = Stock.new(params.permit![:stock_attributes])
     #@date_expiration = DateExpiration.new(params.permit![:date_expiratoins_attributes])
             
-    #if Rails.cache.read('Pverificado') == 'existe'
+    if Rails.cache.read('Pverificado') == 'existe'
                 Rails.cache.delete('Pverificado') 
 
               @product = Product.new(product_params)
@@ -107,10 +107,10 @@ class ProductsController < ApplicationController
               render json: @product.errors, status: :unprocessable_entity
             end
           
-          #  else
-           # render json: {resive: 'no tiene permiso'}
+            else
+            render json: {resive: 'no tiene permiso'}
     end
-  #end
+  end
 
   def envio_email_vencidos
     ApplicationMailer.new_envio_email.deliver_now
@@ -119,8 +119,8 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-    #if Rails.cache.read('Pnuverificado') == 'existe'
-     # Rails.cache.delete('Pnuverificado') 
+    if Rails.cache.read('Pnuverificado') == 'existe'
+      Rails.cache.delete('Pnuverificado') 
     if @product.update(product_params)
       dato = @product.as_json
               producto = dato["pdescripcion"]
@@ -132,9 +132,9 @@ class ProductsController < ApplicationController
     else
       render json: @product.errors, status: :unprocessable_entity
     end
-  #else
-   # render json: {resive: 'no tiene permiso'}
-  #end
+  else
+    render json: {resive: 'no tiene permiso'}
+ end
   end
 
   # DELETE /products/1

@@ -43,8 +43,8 @@ class BrandsController < ApplicationController
   
   # PATCH/PUT /brands/1
   def update
-#   if Rails.cache.read('PBRnuverificado') == 'existe'
- #   Rails.cache.delete('PBRnuverificado')
+   if Rails.cache.read('PBRnuverificado') == 'existe'
+    Rails.cache.delete('PBRnuverificado')
    
     if @brand.update(brand_params)
       dato = @category.as_json
@@ -57,10 +57,10 @@ class BrandsController < ApplicationController
     else
       render json: @brand.errors, status: :unprocessable_entity
     end
-  #else
-   # render json: {resive: 'no tiene permiso'}
+  else
+    render json: {resive: 'no tiene permiso'}
 
- # end
+  end
   end
 
   # DELETE /brands/1

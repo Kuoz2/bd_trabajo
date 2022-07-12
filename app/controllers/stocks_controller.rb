@@ -63,8 +63,8 @@ class StocksController < ApplicationController
 
   # POST /stocks
   def create
-    #if Rails.cache.read('PSverificado') == 'existe'
-     # Rails.cache.delete('PSverificado')
+    if Rails.cache.read('PSverificado') == 'existe'
+      Rails.cache.delete('PSverificado')
     @stock = Stock.new(stock_params)
 
     if @stock.save
@@ -78,17 +78,17 @@ class StocksController < ApplicationController
     else
       render json: @stock.errors, status: :unprocessable_entity
     end
-   #else
-    #render json: {resive: 'no tiene permiso'}
-   #end
+   else
+    render json: {resive: 'no tiene permiso'}
+   end
   end
 
 
 
   # PATCH/PUT /stocks/1
   def update
-    #if Rails.cache.read('PSnuverificado') == 'existe' 
-     # Rails.cache.delete('PSnuverificado')
+    if Rails.cache.read('PSnuverificado') == 'existe' 
+      Rails.cache.delete('PSnuverificado')
     if @stock.update(stock_params)
       dato = @stock.as_json
               producto = dato["pstock"]
@@ -100,10 +100,10 @@ class StocksController < ApplicationController
     else
       render json: @stock.errors, status: :unprocessable_entity
     end
-  #else
-   # render json: {resive: 'no tiene permiso'}
+  else
+    render json: {resive: 'no tiene permiso'}
 
-  #end
+  end
   end
 
   # DELETE /stocks/1
