@@ -3,7 +3,7 @@ class BinnaclesController < ApplicationController
 
   # GET /binnacles
   def index
-    @binnacles = Binnacle.all
+    @binnacles = Binnacle.order(id: :desc).limit(5)
 
     render json: @binnacles
   end

@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   def show
-    render json: @product, :include=>[:stock, :date_expiration]
+    render json: @product, :include=>[:stock, :date_expiration, :category, :brand]
   end
 
   def codigos_debarra
@@ -97,7 +97,8 @@ class ProductsController < ApplicationController
               #ApplicationMailer.new_envio_email.deliver_now
               dato = @product.as_json
               producto = dato["pdescripcion"]
-              bitacora = Binnacle.new(asunto: "Guardo", q_se_iso:producto.to_s)
+              idProducto = dato["id"]
+              bitacora = Binnacle.new(asunto: "Guardo un producto", q_se_iso:producto.to_s, producto:idProducto.to_i)
               bitacora.save
               puts bitacora.as_json
               render json: {guardado: 'correctamente'}, status: :created, location: @product
@@ -114,20 +115,26 @@ class ProductsController < ApplicationController
   def envio_email_vencidos
     ApplicationMailer.new_envio_email.deliver_now
   end
-
+  
 
   # PATCH/PUT /products/1
   def update
-    if Rails.cache.read('Pnuverificado') == 'existe'
-      Rails.cache.delete('Pnuverificado') 
+    #if Rails.cache.read('Pnuverificado') == 'existe'
+     # Rails.cache.delete('Pnuverificado') 
     if @product.update(product_params)
+      dato = @product.as_json
+              producto = dato["pdescripcion"]
+              idProducto = dato["id"]
+              bitacora = Binnacle.new(asunto: "actualizo un producto", q_se_iso:producto.to_s, producto: idProducto.to_i)
+              bitacora.save
+              puts bitacora.as_json
       render json: @product
     else
       render json: @product.errors, status: :unprocessable_entity
     end
-  else
-    render json: {resive: 'no tiene permiso'}
-  end
+  #else
+   # render json: {resive: 'no tiene permiso'}
+  #end
   end
 
   # DELETE /products/1

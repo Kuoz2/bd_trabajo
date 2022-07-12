@@ -20,6 +20,12 @@ class BrandsController < ApplicationController
     @brand = Brand.new(brand_params)
 
     if @brand.save
+      dato = @category.as_json
+        marca = dato["bnombre"]
+        idMarca = dato["id"]
+        bitacora = Binnacle.new(asunto: "Guardo una marca", q_se_iso:marca.to_s, marca:idMarca.to_i)
+        bitacora.save
+        puts bitacora.as_json
       render json: @brand, status: :created, location: @brand
     else
       render json: @brand.errors, status: :unprocessable_entity
@@ -41,6 +47,12 @@ class BrandsController < ApplicationController
  #   Rails.cache.delete('PBRnuverificado')
    
     if @brand.update(brand_params)
+      dato = @category.as_json
+      marca = dato["bnombre"]
+      idMarca = dato["id"]
+      bitacora = Binnacle.new(asunto: "Actualizo una marca", q_se_iso:marca.to_s, marca:idMarca.to_i)
+      bitacora.save
+      puts bitacora.as_json
       render json: {actualizado: 'correctamente' }
     else
       render json: @brand.errors, status: :unprocessable_entity
