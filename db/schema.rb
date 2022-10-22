@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_22_223818) do
+ActiveRecord::Schema.define(version: 2022_10_22_230907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2022_10_22_223818) do
     t.bigint "cod_market", default: 1
     t.bigint "pvalor", default: 0
     t.boolean "voucher_vendido", default: false
-    t.bigint "pcodigo"
+    t.string "pcodigo"
     t.index ["product_id"], name: "index_codes_on_product_id"
   end
 
