@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_10_232624) do
+ActiveRecord::Schema.define(version: 2022_10_22_223818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2022_07_10_232624) do
     t.bigint "cod_market", default: 1
     t.bigint "pvalor", default: 0
     t.boolean "voucher_vendido", default: false
+    t.bigint "pcodigo"
     t.index ["product_id"], name: "index_codes_on_product_id"
   end
 
@@ -205,6 +206,13 @@ ActiveRecord::Schema.define(version: 2022_07_10_232624) do
     t.index ["payment_id"], name: "index_sales_on_payment_id"
     t.index ["user_id"], name: "index_sales_on_user_id"
     t.index ["voucher_id"], name: "index_sales_on_voucher_id"
+  end
+
+  create_table "socket_io_attachments", id: false, force: :cascade do |t|
+    t.bigserial "id", null: false
+    t.datetime "created_at", default: -> { "now()" }
+    t.binary "payload"
+    t.index ["id"], name: "socket_io_attachments_id_key", unique: true
   end
 
   create_table "stocks", force: :cascade do |t|

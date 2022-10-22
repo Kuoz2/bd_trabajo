@@ -46,6 +46,6 @@ class BinnaclesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def binnacle_params
-      params.require(:binnacle).permit(:asunto, :q_se_iso, :hora, :dia)
+      params.require(:binnacle).permit(:asunto, :q_se_iso, :hora, :dia, :producto, :categoria, :stock, :marca)
     end
 end
