@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_22_230907) do
+ActiveRecord::Schema.define(version: 2022_10_23_212106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,13 +63,11 @@ ActiveRecord::Schema.define(version: 2022_10_22_230907) do
     t.boolean "panaderia", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "product_id"
-    t.bigint "cod_panaderia", default: 1
-    t.bigint "cod_market", default: 1
+    t.bigint "cod_panaderia", default: 0
+    t.bigint "cod_market", default: 0
     t.bigint "pvalor", default: 0
     t.boolean "voucher_vendido", default: false
-    t.string "pcodigo"
-    t.index ["product_id"], name: "index_codes_on_product_id"
+    t.string "pcodigo", default: ""
   end
 
   create_table "config_vouchers", force: :cascade do |t|
@@ -286,7 +284,6 @@ ActiveRecord::Schema.define(version: 2022_10_22_230907) do
 
   add_foreign_key "archings", "decreases"
   add_foreign_key "archings", "vouchers"
-  add_foreign_key "codes", "products"
   add_foreign_key "decreases", "users"
   add_foreign_key "payments", "half_payments"
   add_foreign_key "products", "brands"
