@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_23_212106) do
+ActiveRecord::Schema.define(version: 2022_11_10_152402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,11 +63,12 @@ ActiveRecord::Schema.define(version: 2022_10_23_212106) do
     t.boolean "panaderia", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "cod_panaderia", default: 0
-    t.bigint "cod_market", default: 0
+    t.bigint "cod_panaderia", default: 1
+    t.bigint "cod_market", default: 1
     t.bigint "pvalor", default: 0
     t.boolean "voucher_vendido", default: false
-    t.string "pcodigo", default: ""
+    t.string "pcodigo"
+    t.bigint "total_doble", default: 0
   end
 
   create_table "config_vouchers", force: :cascade do |t|
