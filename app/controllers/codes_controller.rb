@@ -66,6 +66,6 @@ class CodesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def code_params
-      params.require(:code).permit(:hora_emision, :cod_market, :market,:pcodigo, :panaderia, :cod_panaderia, :pvalor, :voucher_vendido)
+      params.require(:code).permit(:hora_emision, :cod_market, :market,:pcodigo, :panaderia, :cod_panaderia, :pvalor, :voucher_vendido, :total_doble)
     end
 end
