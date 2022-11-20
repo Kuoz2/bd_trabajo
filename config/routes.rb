@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     collection do 
       get 'no_mitidos'
       get 'last_code'
+      get 'imprime_ultimoscinco'
     end
   end
   resources :quick_sales do 
