@@ -18,7 +18,7 @@ class CodesController < ApplicationController
   def imprime_ultimoscinco
     @nCodes = Code.all().order(id: :desc).limit(10 )
     nMitidos = []
-    @nCodes.each { |d| if d.voucher_vendido == false then nMitidos.push(d)  end}
+    @nCodes.each { |d| if d.voucher_vendido == false && d.cod_market != d.cod_panaderia then nMitidos.push(d)  end}
       @Mitidofalse = nMitidos
       render json: @Mitidofalse
   end
