@@ -23,8 +23,8 @@ class TaxesController < ApplicationController
 
   # POST /taxes
   def create
-    if Rails.cache.read('PTverificado') == 'existe'
-      Rails.cache.delete('PTverificado')
+   # if Rails.cache.read('PTverificado') == 'existe'
+    #  Rails.cache.delete('PTverificado')
     @tax = Tax.new(tax_params)
 
     if @tax.save
@@ -32,9 +32,9 @@ class TaxesController < ApplicationController
     else
       render json: @tax.errors, status: :unprocessable_entity
     end
-  else
-    render json: {resive: 'no tiene permiso'}
-    end
+  #else
+   # render json: {resive: 'no tiene permiso'}
+   # end
   end
 
   # PATCH/PUT /taxes/1
