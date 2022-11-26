@@ -15,24 +15,24 @@ class BrandsController < ApplicationController
 
   # POST /brands
   def create
-    if  Rails.cache.read('PBRverificado') == 'existe' 
-      Rails.cache.delete('PBRverificado')
+    #if  Rails.cache.read('PBRverificado') == 'existe' 
+     # Rails.cache.delete('PBRverificado')
     @brand = Brand.new(brand_params)
 
     if @brand.save
-      dato = @category.as_json
-        marca = dato["bnombre"]
-        idMarca = dato["id"]
-        bitacora = Binnacle.new(asunto: "Guardo una marca", q_se_iso:marca.to_s, marca:idMarca.to_i)
-        bitacora.save
-        puts bitacora.as_json
+   #   dato = @category.as_json
+    #    marca = dato["bnombre"]
+     #   idMarca = dato["id"]
+      #  bitacora = Binnacle.new(asunto: "Guardo una marca", q_se_iso:marca.to_s, marca:idMarca.to_i)
+       # bitacora.save
+        #puts bitacora.as_json
       render json: @brand, status: :created, location: @brand
     else
       render json: @brand.errors, status: :unprocessable_entity
     end
-  else
-    render json: {resive: 'no tiene permiso'}
-  end
+  #else
+   # render json: {resive: 'no tiene permiso'}
+  #end
   end
 
   #verificar si existe la marca

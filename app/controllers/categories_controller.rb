@@ -33,24 +33,24 @@ class CategoriesController < ApplicationController
   # POST /categories
   def create 
     
-  if  Rails.cache.read('PCAverificado') == 'existe' 
-   Rails.cache.delete('PCAverificado') 
+  #if  Rails.cache.read('PCAverificado') == 'existe' 
+  # Rails.cache.delete('PCAverificado') 
 
     @category = Category.new(category_params)
     if @category.save
-      dato = @category.as_json
-      categorias = dato["cnombre"]
-      idCategorias = dato["id"]
-      bitacora = Binnacle.new(asunto: "Guardo una categoria", q_se_iso:categorias.to_s, categoria:idCategorias.to_i)
-      bitacora.save
-      puts bitacora.as_json
+   #   dato = @category.as_json
+    #  categorias = dato["cnombre"]
+     # idCategorias = dato["id"]
+      #bitacora = Binnacle.new(asunto: "Guardo una categoria", q_se_iso:categorias.to_s, categoria:idCategorias.to_i)
+      #bitacora.save
+      #puts bitacora.as_json
       render json: {respuesta: "correctamente"}, status: :created, location: @category
     else
       render json: @category.errors, status: :not_found
     end
-   else
-   render json: {resive: 'no tiene permiso'}
-  end
+  # else
+   #render json: {resive: 'no tiene permiso'}
+  #end
   end
     
   # PATCH/PUT /categories/1
