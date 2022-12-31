@@ -10,6 +10,64 @@ class CodesController < ApplicationController
       render json: @Mitidofalse
   end
 
+  def ventashoy
+    dia_Act=Time.now.strftime("%F").to_s
+    @fechahoy=Code.all
+    @variable = [] 
+    @fechahoy.each {|res|
+      if res.voucher_vendido == true
+      if res.created_at.strftime("%F").to_s == dia_Act then
+        @variable.push(res.pvalor)
+       end
+      end
+      }
+    render json: @variable.sum()
+    end
+
+    def ventasayer
+        @valoreayer = []
+        mes_ahora=Time.now.month
+        dia_atras=Time.now.day.to_i - 1
+        fechayer=Code.all
+        fechayer.each {|res|
+           #if res.voucher == true
+           if res.created_at.strftime("%F").to_date.month == mes_ahora
+              if res.created_at.strftime("%F").to_date.day == dia_atras
+              @valoreayer.push(res.pvalor)
+              end
+           end
+           #end
+        }
+        render json: @valoreayer.sum()
+    end
+
+    def ventas_este_mes
+      @estemes=[]
+      mes_ahora=Time.now.month
+      allfecha=Code.all
+      allfecha.each { |res|
+      #if res.voucher_vendido == true
+        if res.created_at.strftime("%F").to_date.month == mes_ahora
+          @estemes.push(res.pvalor)
+      end
+      #end
+      }
+      render json: @estemes.sum()
+    end
+    def ventas_mespasado
+      @mespasado=[]
+      mes_pasado=Time.now.month.to_i - 1
+      @total_ventas=Code.all
+      @total_ventas.each{|res| 
+        #if res.voucher_vendido == true
+          if res.created_at.strftime("%F").to_date.month.to_i == mes_pasado
+            @mespasado.push(res.pvalor)
+          end
+        #end
+      }
+      render json: @mespasado.sum()
+    end
+
   def last_code
     @CodeLast = Code.last
     render json: @CodeLast

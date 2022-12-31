@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   resources :binnacles
   resources :codes do 
     collection do 
+      get 'ventas_mespasado'
+      get 'ventas_este_mes'
+      get 'ventasayer'
+      get 'ventashoy'
       get 'no_mitidos'
       get 'last_code'
       get 'imprime_ultimoscinco'
