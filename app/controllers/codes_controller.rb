@@ -55,23 +55,23 @@ class CodesController < ApplicationController
       render json: @estemes.sum()
     end
     def ventas_mespasado
-      @mespasado=[]
+      mespasado=[]
       mes_pasado=Time.now.month - 1
-      @total_ventas=Code.all
-      @total_ventas.each{|res| 
-        puts res.created_at.strftime("%F").to_date.month == 12
+      total_ventas=Code.all
+      total_ventas.each{|res| 
+      if res.pvalor != nil && res.pvalor != 5
         if res.created_at.strftime("%F").to_date.month == 12 && mes_pasado == 0
-          @mespasado.push(res.pvalor)
-        else
-        #if res.voucher_vendido == true
+          mespasado.push(res.pvalor)
+      else
           if (res.created_at.strftime("%F").to_date.month - 1) == mes_pasado
-            @mespasado.push(res.pvalor)
+            mespasado.push(res.pvalor)
           end
         end
-        #end
+      end
       }
-      render json: @mespasado.sum()
+      render json: mespasado.sum()
     end
+
 
   def last_code
     @CodeLast = Code.last
