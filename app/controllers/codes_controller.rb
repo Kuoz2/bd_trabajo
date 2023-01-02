@@ -56,13 +56,18 @@ class CodesController < ApplicationController
     end
     def ventas_mespasado
       @mespasado=[]
-      mes_pasado=Time.now.month.to_i - 1
+      mes_pasado=Time.now.month - 1
       @total_ventas=Code.all
       @total_ventas.each{|res| 
+        puts res.created_at.strftime("%F").to_date.month == 12
+        if res.created_at.strftime("%F").to_date.month == 12 && mes_pasado == 0
+          @mespasado.push(res.pvalor)
+        else
         #if res.voucher_vendido == true
-          if (res.created_at.strftime("%F").to_date.month.to_i - 1) == mes_pasado
+          if (res.created_at.strftime("%F").to_date.month - 1) == mes_pasado
             @mespasado.push(res.pvalor)
           end
+        end
         #end
       }
       render json: @mespasado.sum()
