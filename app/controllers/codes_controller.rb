@@ -15,11 +15,13 @@ class CodesController < ApplicationController
     @fechahoy=Code.all
     @variable = [] 
     @fechahoy.each {|res|
+    if res.pvalor != nil && res.pvalor != 5
       if res.voucher_vendido == true
-      if res.created_at.strftime("%F").to_s == dia_Act then
-        @variable.push(res.pvalor)
-       end
+        if res.created_at.strftime("%F").to_s == dia_Act then
+          @variable.push(res.pvalor)
+        end
       end
+    end
       }
     render json: @variable.sum()
     end
@@ -30,12 +32,14 @@ class CodesController < ApplicationController
         dia_atras=Time.now.day.to_i - 1
         fechayer=Code.all
         fechayer.each {|res|
+          if res.pvalor != nil && res.pvalor != 5
            #if res.voucher == true
            if res.created_at.strftime("%F").to_date.month == mes_ahora
               if res.created_at.strftime("%F").to_date.day == dia_atras
               @valoreayer.push(res.pvalor)
               end
            end
+          end
            #end
         }
         render json: @valoreayer.sum()
@@ -69,7 +73,7 @@ class CodesController < ApplicationController
         end
       end
       }
-      render json: mespasado.sum()
+      render json: {valortotal:mespasado.sum()} 
     end
 
 
