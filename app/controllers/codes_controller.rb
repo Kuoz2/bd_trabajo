@@ -60,7 +60,7 @@ class CodesController < ApplicationController
       @total_ventas=Code.all
       @total_ventas.each{|res| 
         #if res.voucher_vendido == true
-          if res.created_at.strftime("%F").to_date.month.to_i == mes_pasado
+          if (res.created_at.strftime("%F").to_date.month.to_i - 1) == mes_pasado
             @mespasado.push(res.pvalor)
           end
         #end
