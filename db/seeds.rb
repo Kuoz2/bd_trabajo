@@ -19,25 +19,3 @@ q1 = Code.create!(
           :total_doble=> 23213
 )
 
-q2 = Code.create!(
-    :hora_emision => 3, 
-    :cod_market => 321312,
-     :market => true,
-     :pcodigo => 321321,
-      :panaderia => true,
-       :cod_panaderia => 213231,
-        :pvalor => 321,
-         :voucher_vendido => false,
-          :total_doble=> 23213
-)
-q3 = Code.create!(
-    :hora_emision => 3, 
-    :cod_market => 321312,
-     :market => true,
-     :pcodigo => 321321,
-      :panaderia => true,
-       :cod_panaderia => 213231,
-        :pvalor => 321,
-         :voucher_vendido => false,
-          :total_doble=> 23213
-)

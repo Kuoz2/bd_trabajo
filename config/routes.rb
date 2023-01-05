@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get 'no_mitidos'
       get 'last_code'
       get 'imprime_ultimoscinco'
+      get 'vouchers_panaderia'
+      get 'voucher_market'
     end
   end
   resources :quick_sales do 

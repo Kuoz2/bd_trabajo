@@ -90,6 +90,36 @@ class CodesController < ApplicationController
       render json: @Mitidofalse
   end
 
+  def vouchers_panaderia
+    pvoucher = Code.all().order(id: :desc).limit(10)
+    meshoy=Time.now().month
+    diahoy=Time.now().day
+    vpanaderia=[]
+    pvoucher.each{|d| 
+      if d.created_at.strftime("%F").to_date.month == meshoy && d.created_at.strftime("%F").to_date.day==diahoy
+          if(d.panaderia==true && d.market==false)
+            vpanaderia.push(d)
+          end
+      end
+    }
+    render json: vpanaderia
+  end
+
+  def voucher_market
+    pvoucher = Code.all().order(id: :desc).limit(10)
+    meshoy=Time.now().month
+    diahoy=Time.now().day
+    vmarket=[]
+    pvoucher.each{|d| 
+      if d.created_at.strftime("%F").to_date.month == meshoy && d.created_at.strftime("%F").to_date.day==diahoy
+          if(d.market==true && d.panaderia==false)
+            vmarket.push(d)
+          end
+      end
+    }
+    render json: vmarket
+  end
+
   # GET /codes
   def index
     @codes = Code.all
