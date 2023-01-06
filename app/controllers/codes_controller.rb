@@ -103,7 +103,8 @@ class CodesController < ApplicationController
           end
       end
     }
-    render json: vpanaderia
+    @emitidopanaderia=vpanaderia
+    render json: @emitidopanaderia
   end
 
   def voucher_market
