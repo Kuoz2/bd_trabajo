@@ -92,8 +92,8 @@ class CodesController < ApplicationController
 
   def vouchers_panaderia
     pvoucher = Code.all
-    meshoy=Time.now().month
-    diahoy=Time.now().day
+    meshoy=Time.now.month
+    diahoy=Time.now.day
     vpanaderia=[]
     pvoucher.each{|d| 
       if d.created_at.strftime("%F").to_date.month == meshoy && d.created_at.strftime("%F").to_date.day==diahoy
