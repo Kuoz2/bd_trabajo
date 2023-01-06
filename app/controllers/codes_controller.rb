@@ -99,7 +99,7 @@ class CodesController < ApplicationController
     pvoucher.each{|d| 
       if d.created_at.strftime("%F").to_date.month == meshoy && d.created_at.strftime("%F").to_date.day==diahoy
           if(d.panaderia==true && d.market==false)
-          return  vpanaderia.push(d)
+            vpanaderia.push(d)
           end
       end
     }
