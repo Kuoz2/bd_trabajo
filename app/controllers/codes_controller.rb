@@ -93,7 +93,7 @@ class CodesController < ApplicationController
   def vouchers_panaderia
     pvoucher = Code.all
     meshoy=Time.now.month
-    diahoy=Time.now.day - 1
+    diahoy=Time.now.day + 1
     vpanaderia=[]
     puts diahoy
     pvoucher.each{|d| 
