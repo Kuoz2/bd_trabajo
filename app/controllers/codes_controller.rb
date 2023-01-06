@@ -114,7 +114,7 @@ class CodesController < ApplicationController
     vmarket=[]
     pvoucher.each{|d| 
       if d.created_at.strftime("%F").to_date.month == meshoy && d.created_at.strftime("%F").to_date.day==diahoy
-          if(d.market==true && d.panaderia==false)
+          if d.market==true && d.panaderia==false
             vmarket.push(d)
           end
       end
