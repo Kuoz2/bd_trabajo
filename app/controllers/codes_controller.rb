@@ -102,7 +102,7 @@ class CodesController < ApplicationController
           end
       end
     }
-    render json: Code.all
+    render json: vpanaderia
   end
 
   def voucher_market
