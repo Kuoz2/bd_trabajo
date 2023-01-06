@@ -91,7 +91,7 @@ class CodesController < ApplicationController
   end
 
   def vouchers_panaderia
-    pvoucher = Code.all()
+    pvoucher = 
     meshoy=Time.now().month
     diahoy=Time.now().day
     vpanaderia=[]
@@ -102,7 +102,7 @@ class CodesController < ApplicationController
           end
       end
     }
-    render json: vpanaderia
+    render json: Code.all
   end
 
   def voucher_market
