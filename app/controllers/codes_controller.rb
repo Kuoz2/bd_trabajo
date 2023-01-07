@@ -98,7 +98,7 @@ class CodesController < ApplicationController
     puts diahoy
     pvoucher.each{|d| 
       #if d.created_at.strftime("%F").to_date.month == meshoy && d.created_at.strftime("%F").to_date.day==diahoy
-          if d.panaderia==true && d.market==false && d.cod_panaderia != 0
+          if d.panaderia==true && d.market==false && d.cod_panaderia != 0 && d.cod_market == 0
             vpanaderia.push(d)
          end
       #end
