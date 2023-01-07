@@ -91,9 +91,9 @@ class CodesController < ApplicationController
   end
 
   def vouchers_panaderia
-    pvoucher = Code.all
+    pvoucher = Code.all().order(id: :desc).limit(10 )
     meshoy=Time.now.month
-    diahoy=Time.now.day + 1
+    diahoy=Time.now.day
     vpanaderia=[]
     puts diahoy
     pvoucher.each{|d| 
