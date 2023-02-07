@@ -33,8 +33,8 @@ class CategoriesController < ApplicationController
   # POST /categories
   def create 
     
-  #if  Rails.cache.read('PCAverificado') == 'existe' 
-  # Rails.cache.delete('PCAverificado') 
+  if  Rails.cache.read('PCAverificado') == 'existe' 
+   Rails.cache.delete('PCAverificado') 
 
     @category = Category.new(category_params)
     if @category.save
@@ -48,9 +48,9 @@ class CategoriesController < ApplicationController
     else
       render json: @category.errors, status: :not_found
     end
-  # else
-   #render json: {resive: 'no tiene permiso'}
-  #end
+   else
+   render json: {resive: 'no tiene permiso'}
+  end
   end
     
   # PATCH/PUT /categories/1
@@ -59,12 +59,12 @@ class CategoriesController < ApplicationController
       Rails.cache.delete('PCAnuverificado' )
       if @category.update(category_params)
         
-        dato = @category.as_json
-        categorias = dato["cnombre"]
-        idCategorias = dato["id"]
-        bitacora = Binnacle.new(asunto: "Actualizo una categoria", q_se_iso:categorias.to_s, categoria:idCategorias.to_i)
-        bitacora.save
-        puts bitacora.as_json
+      #  dato = @category.as_json
+       # categorias = dato["cnombre"]
+        #idCategorias = dato["id"]
+        #bitacora = Binnacle.new(asunto: "Actualizo una categoria", q_se_iso:categorias.to_s, categoria:idCategorias.to_i)
+        #bitacora.save
+        #puts bitacora.as_json
       render json: {actualizado: 'correctamente'}
     else
       render json: @category.errors, status: :unprocessable_entity
@@ -104,17 +104,17 @@ class CategoriesController < ApplicationController
 #Verificar antes de actualizar
 def verif_before_update_category
   puts "entra aqui"
-  dato = Hash.new
-  dato  = request.raw_post  
-    puts "jtli entrante #{dato}"
-    if User.exists?(:jti => dato)
-     Rails.cache.write('PCAnuverificado', 'existe') 
-     @informacion = {resultado: 'existe'}
-  else
-    @informacion = {resultado: 'inexistente'}
-      #Ex:- :null => false
-  end
-  render json: @informacion
+    dato  = request.raw_post  
+      puts "jtli entrante #{dato}"
+      if User.exists?(:jti => dato)
+       Rails.cache.write('PCAnuverificado', 'existe') 
+       @informacion = {resultado: 'existe'}
+    else
+      @informacion = {resultado: 'inexistente'}
+        #Ex:- :null => false
+    end
+    render json: @informacion
+ 
 end
 
 #Verificar antes de eliminar

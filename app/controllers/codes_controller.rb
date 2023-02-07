@@ -97,11 +97,13 @@ class CodesController < ApplicationController
     vpanaderia=[]
     puts diahoy
     pvoucher.each{|d| 
+    if d.voucher_vendido === false
       if d.created_at.strftime("%F").to_date.month == meshoy && d.created_at.strftime("%F").to_date.day==diahoy
           if d.panaderia==true && d.market==false 
             vpanaderia.push(d)
          end
       end
+    end
     }
     @emitidopanaderia=vpanaderia
     render json: @emitidopanaderia
