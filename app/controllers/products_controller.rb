@@ -88,7 +88,6 @@ class ProductsController < ApplicationController
 
               @product = Product.new(product_params)
               @product.create_stock!(params.permit![:stock])
-              @product.create_date_expiration!(params.permit![:date_expiration])
             
     #@product.Stock.create(params!.permit![:stock])
     #@product.DateExpiration.create(params!.permit![:date_expiration])
