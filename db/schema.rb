@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_152402) do
     t.bigint "provider_id"
     t.integer "precio_provider"
     t.bigint "tax_id"
-    t.bigint "piva"
+    t.bigint "piva" 
     t.bigint "brand_id"
     t.bigint "pvneto"
     t.string "fecha_vencimiento"
