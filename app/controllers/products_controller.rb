@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   def index
     
     @products = Product.all
-    render json: @products, :include => [:stock, :category, :brand, :date_expiration]
+    render json: @products, :include => [:stock, :category, :brand]
   end
 
   #Get cuanto le falta para vencer el producto
@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   def show
-    render json: @product, :include=>[:stock, :date_expiration, :category, :brand]
+    render json: @product, :include=>[:stock,  :category, :brand]
   end
 
   def codigos_debarra
